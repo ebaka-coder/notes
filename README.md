@@ -2,7 +2,7 @@
 
 ## 信息收集
 
-### 基本信息（网站权重）
+### 基本信息
 [天眼查](https://www.tianyancha.com/)
 
 #### whois
