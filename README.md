@@ -3,9 +3,7 @@
 ## 信息收集
 
 ### 基本信息
-[天眼查](https://www.tianyancha.com/)
-
-#### whois
+- [天眼查](https://www.tianyancha.com/)
 - http://whois.chinaz.com/
 - https://whois.aliyun.com/
 - https://www.whois365.com/cn/
