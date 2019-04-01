@@ -42,7 +42,6 @@
 - https://crackstation.net/
 
 
-
 ### pcap文件在线分析
 - https://packettotal.com/
 
@@ -73,13 +72,14 @@
 - https://xz.aliyun.com/
 - https://www.anquanke.com/
 - https://www.freebuf.com/
+- http://paper.seebug.org
 - https://bbs.ichunqiu.com
 - https://bbs.pediy.com/
 - https://www.52pojie.cn
 
 #### Demo
 ```
-"burp" site:https://xz.aliyun.com/ OR https://www.anquanke.com/ OR https://www.freebuf.com/ OR https://bbs.ichunqiu.com OR https://bbs.pediy.com/ OR https://www.52pojie.cn
+"burp" site:https://xz.aliyun.com/ OR https://www.anquanke.com/ OR http://paper.seebug.org OR https://www.freebuf.com/ OR https://bbs.ichunqiu.com OR https://bbs.pediy.com/ OR https://www.52pojie.cn
 ```
 
 ### 最新漏洞&&技术文章
