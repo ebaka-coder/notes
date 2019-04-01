@@ -19,12 +19,19 @@
 - 扫描工具：https://github.com/lijiejie/subDomainsBrute
 - 在线工具：https://phpinfo.me/domain/
 
+### github用户邮箱收集
+https://github.com/paulirish/github-email/
+
 ### DNS反查
 - http://dns.chacha.cn/
 - http://ptrarchive.com/
 
 ### 在线端口扫描
 - https://hackertarget.com/tcp-port-scan/
+#### Demo
+```
+curl "https://api.hackertarget.com/nmap/?q=baidu.com"
+```
 
 ### 编码/进制/加密转换
 - [Hex to ASCII](https://www.rapidtables.com/convert/number/hex-to-ascii.html)
