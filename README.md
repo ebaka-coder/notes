@@ -36,6 +36,7 @@ curl "https://api.hackertarget.com/nmap/?q=baidu.com"
 ### 编码/进制/加密转换
 - [Hex to ASCII](https://www.rapidtables.com/convert/number/hex-to-ascii.html)
 - [字符串在线对比](https://text-compare.com/)
+- [各种文件在线diff](https://www.diffnow.com/)
 - [在线进制转换](http://tool.oschina.net/hexconvert)
 - http://www.ximizi.com/JinZhi_ZhuanHuan.php
 - [二维码](http://jiema.wwei.cn/)
