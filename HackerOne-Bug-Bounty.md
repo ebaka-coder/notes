@@ -42,4 +42,7 @@ https://hackerone.com/priceline
 - 不要把扫描器的报告发过来。如果漏洞真实存在，你需要提供复现的必须步骤，或/和PoC。自动化报告不收，我们会马上关闭issue，拒绝处理。
 - 由于error或者文本注入导致的内容污染
 - 有漏洞组件/库(比如jQuery)，但是没有可展示的payload，不收
-- 
+
+## Domains in Scope
+- https://github.com/arkadiyt/bounty-targets-data
+- https://github.com/zricethezav/h1domains
