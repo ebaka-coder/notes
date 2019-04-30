@@ -29,3 +29,4 @@ Extension renegotiation_info, renegotiated_connection: <empty>
 
 ### 参考
 https://medium.com/@kasunpdh/ssl-handshake-explained-4dabb87cdce
+https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_7.1.0/com.ibm.mq.doc/sy10660_.htm
