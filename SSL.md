@@ -1,4 +1,4 @@
-两种SSL握手
+## SSL握手过程
 
 单向SSL握手（one-way）和双向SSL握手（Mutual SSL）
 通常在我们浏览HTTPs网站的时候，只进行了单向SSL握手，因为只需要Client验证Server的有效性。而双向SSL出现了双方都需要验证对方身份的情况。
@@ -90,7 +90,8 @@ Server返回的内容比较多，所以分成几个包来发送。
 ![image.png](https://xzfile.aliyuncs.com/media/upload/picture/20190430160753-0e4b4ad2-6b1f-1.png)
 
 ### 完整的SSL握手过程
-![](https://www.ibm.com/support/knowledgecenter/SSFKSJ_7.1.0/com.ibm.mq.doc/sy10660a.gif)
+来自IBM：![](https://www.ibm.com/support/knowledgecenter/SSFKSJ_7.1.0/com.ibm.mq.doc/sy10660a.gif)
+来自AWVS：![](https://www.acunetix.com/wp-content/uploads/2017/01/image34.png)
 
 ### 参考
 https://medium.com/@kasunpdh/ssl-handshake-explained-4dabb87cdce
