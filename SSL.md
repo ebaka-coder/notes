@@ -41,10 +41,13 @@ Compression Method: 0
 Extension renegotiation_info, renegotiated_connection: <empty>
 ***
 ```
+#### Server Hello Demo
+![image.png](https://xzfile.aliyuncs.com/media/upload/picture/20190430153206-0e669a94-6b1a-1.png)
 
 ### 3. Server Certificate (Server → Client)
 Server发送一个由其private key签名的TLS/SSL证书，带上它的public key，用于Client验证。
 Client验证Server的证书，细节参考：https://www.ibm.com/support/knowledgecenter/SSFKSJ_7.1.0/com.ibm.mq.doc/sy10670_.htm
+![image.png](https://xzfile.aliyuncs.com/media/upload/picture/20190430154330-a5da5e5a-6b1b-1.png)
 
 ### 4. Client Certificate (Client → Server, 可选)
 在少数情况下，Server需要对Client的身份进行认证。
@@ -54,21 +57,39 @@ Client使用Server's 公钥加密生成一个random byte string，然后将其�
 仅当Server提供的证书不足以使Client完成pre-master secret交换时，才发送此消息。
 若Server发送了`client certificate request`消息，Client收到后，会使用Client's私钥加密生成一个random byte string，连同Client's证书发送给Server。或者发送`no digital certificate alert`，这个alert只是一个警告，在某些协议的实现中，如果Client的认证是必需的，这样会导致握手失败。
 
+![image.png](https://xzfile.aliyuncs.com/media/upload/picture/20190430154602-00b3645c-6b1c-1.png)
+
 ### 6. Server Hello Done (Server → Client)
 Server发送这个表示：Server Hello消息已经结束。
 
-#### Server Hello Demo
-![image.png](https://xzfile.aliyuncs.com/media/upload/picture/20190430153206-0e669a94-6b1a-1.png)
-### 7. Client Key Exchange (Server → Client)
+### 7. Client Key Exchange (Client → Server)
+Client从Server接受到Server Hello Done消息之后，就会发送Client Key Exchange消息。在Client验证完成Server的证书之后，就会准备创建pre-master。 key。
+#### Pre-Master Secret
+在Client发送pre-master key之前，Client会使用从Server发来的证书中提取出来的Server public key来加密。这也意味着只有这个Server可以解密消息。这就是握手中的非对称加密的体现了。
+![image.png](https://xzfile.aliyuncs.com/media/upload/picture/20190430154739-3a5c542a-6b1c-1.png)
 
+#### Master Secret
+在Server收到pre-master key之后，它会用其private key解密。然后就使用伪随机函数（pseudorandom function (PRF)），基于之前交换的Client Random和Server Random来计算master secret key。
+```
+master_secret = PRF(pre_master_secret, "master secret", ClientHello.random + ServerHello.random) [0..47];
+```
+然后，这个48个字节大小的master secret key就会被Client和Server用来对称加密之后通信的数据。
 
-### 8.
+### 8. Client Change Cipher Spec (Client → Server)
+到这里，Client就已经准备好切换到安全的加密环境了。`Change Cipher Spec`协议就是用来变更加密方式的。从现在开始，任意从Client发出的数据将会使用shared key来加密了。
+实际抓包过程发现，这一步已经在第7步（Client Key Exchange (Client → Server)）中有了：
+![image.png](https://xzfile.aliyuncs.com/media/upload/picture/20190430160033-07e1d040-6b1e-1.png)
+只剩下这个：
+![image.png](https://xzfile.aliyuncs.com/media/upload/picture/20190430160230-4dc2b4ee-6b1e-1.png)
 
-
-### 9.
+### 9. Client Handshake Finished (Client → Server)
 在接下来的SSL/TLS会话中，Server和Client就可以通过使用共享密钥（shared secret key）对称加密的方式进行通信了。
+下面就是Client发送的一个被SSL加密的HTTP请求：
+![image.png](https://xzfile.aliyuncs.com/media/upload/picture/20190430160404-858d82c8-6b1e-1.png)
+Server返回的内容比较多，所以分成几个包来发送。
+![image.png](https://xzfile.aliyuncs.com/media/upload/picture/20190430160753-0e4b4ad2-6b1f-1.png)
 
-### 图
+### 完整的SSL握手过程
 ![](https://www.ibm.com/support/knowledgecenter/SSFKSJ_7.1.0/com.ibm.mq.doc/sy10660a.gif)
 
 ### 参考
