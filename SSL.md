@@ -1,12 +1,21 @@
 两种SSL握手
 
 单向SSL握手（one-way）和双向SSL握手（Mutual SSL）
-通常在我们浏览HTTPs网站的时候，只进行了单向SSL握手，因为只需要客户端验证服务端的有效性。而双向SSL出现了双方都需要验证对方身份的情况。
+通常在我们浏览HTTPs网站的时候，只进行了单向SSL握手，因为只需要Client验证Server的有效性。而双向SSL出现了双方都需要验证对方身份的情况。
 
-### 1. Client Hello
+### 1. Client Hello (Client → Server)
 客户端发送一些信息给服务端，以作为服务端后续开启HTTPs连接使用。
 - SSL/TLS版本号
-- random byte string（用于后续的计算）
+比如，TLS 1.2 的client_version 为3,3  因为TLS 1.0被视为Secure Sockets Layer（SSL 3.0）的最低分支， TLS 1.0 is 3,1, TLS 1.1 is 3,2。依次类推。
+- 32字节的random byte string（用于后续密钥的计算），其中前四个字节代表当前的日期和时间，其余28字节是随机数生成器产生的。
+- Session ID
+用来标识此次会话。若session_id为空，则Server会开启一个新的Session；若session_id 不为空，则Server会从之前缓存的sessions中搜索，若找到了则会继续那个session。
+- compression_methods（存在风险，不建议使用）
+压缩方式，用于压缩SSL数据包。压缩可以降低带宽开销以及增加传输速率。
+- Cipher Suites（加密套件）
+加密算法的集合。一般情况，每个加密套件包含一个加密算法，用于处理以下任务：密钥交换、认证（authentication）、大量数据(bulk)交换、消息认证。Client将加密套件以list的形式发送
+- Extensions
+
 ```
 *** ClientHello, TLSv1.2
 RandomCookie: *** ClientHello, TLSv1.2
@@ -16,8 +25,10 @@ Session ID: 239, 10, 92, 143, 185, {}
 ………………………………………………
 ```
 其中`TLS v1.2`表示客户端只支持TLS v1.2及以下TLS版本。
+#### Client Hello Demo
+![image.png](https://xzfile.aliyuncs.com/media/upload/picture/20190430153318-38fa0e62-6b1a-1.png)
 
-### 2. Server Hello
+### 2. Server Hello (Server → Client)
 - 服务端发送从客户端收到的CipherSuite 列表中选出来的CipherSuite ，然后服务端还发送自身的证书；
 - 另一个random byte string
 - 如果服务端有验证客户端证书的需求，它会发送`client certificate request`消息给客户端
@@ -31,23 +42,28 @@ Extension renegotiation_info, renegotiated_connection: <empty>
 ***
 ```
 
-### 3. 
+### 3. Server Certificate (Server → Client)
+Server发送一个由其private key签名的TLS/SSL证书，带上它的public key，用于Client验证。
 Client验证Server的证书，细节参考：https://www.ibm.com/support/knowledgecenter/SSFKSJ_7.1.0/com.ibm.mq.doc/sy10670_.htm
 
-### 4. 
-Client使用Server's 公钥加密生成一个random byte string，然后将其发送给Server（之后将用于对密钥进行计算，加密后续传输的数据）。
+### 4. Client Certificate (Client → Server, 可选)
+在少数情况下，Server需要对Client的身份进行认证。
+Client使用Server's 公钥加密生成一个random byte string，然后将其发送给Server（之后将用于对密钥进行计算，加密后续传输的数据）。然后，Server验证Client的证书，详情参考：https://www.ibm.com/support/knowledgecenter/SSFKSJ_7.1.0/com.ibm.mq.doc/sy10670_.htm
 
-### 5.
+### 5. Server Key Exchange (Server → Client)
+仅当Server提供的证书不足以使Client完成pre-master secret交换时，才发送此消息。
 若Server发送了`client certificate request`消息，Client收到后，会使用Client's私钥加密生成一个random byte string，连同Client's证书发送给Server。或者发送`no digital certificate alert`，这个alert只是一个警告，在某些协议的实现中，如果Client的认证是必需的，这样会导致握手失败。
 
-### 6.
-Server验证Client的证书，详情参考：https://www.ibm.com/support/knowledgecenter/SSFKSJ_7.1.0/com.ibm.mq.doc/sy10670_.htm
+### 6. Server Hello Done (Server → Client)
+Server发送这个表示：Server Hello消息已经结束。
 
-### 7.
-若Client使用密钥向Server发送`finished`消息，表明Client这边的握手已经完成
+#### Server Hello Demo
+![image.png](https://xzfile.aliyuncs.com/media/upload/picture/20190430153206-0e669a94-6b1a-1.png)
+### 7. Client Key Exchange (Server → Client)
+
 
 ### 8.
-若Server使用密钥向Client发送`finished`消息，表明Server这边的握手已经完成
+
 
 ### 9.
 在接下来的SSL/TLS会话中，Server和Client就可以通过使用共享密钥（shared secret key）对称加密的方式进行通信了。
