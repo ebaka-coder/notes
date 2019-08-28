@@ -50,6 +50,9 @@ while the content of `http://127.0.0.1:8000/xxe.dtd` is:
 Demo:
 ![](imgs/sc_20190828163109.png)
 
+####
+This is also the PoC of [CVE-2018-1308](https://mail-archives.apache.org/mod_mbox/www-announce/201804.mbox/%3C000001d3cf68%245ac69af0%241053d0d0%24%40apache.org%3E)
+
 #### Ref
 - http://ceye.io/payloads
 - https://blog.csdn.net/u011721501/article/details/43775691
