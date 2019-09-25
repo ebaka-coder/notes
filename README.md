@@ -16,7 +16,9 @@
 - https://www.ipip.net/ip.html
 
 ### 子域名
+
 - 扫描工具：https://github.com/lijiejie/subDomainsBrute
+- https://github.com/aboul3la/Sublist3r
 - 在线工具：https://phpinfo.me/domain/
 
 ### CMS识别
@@ -27,6 +29,7 @@ https://github.com/paulirish/github-email/
 
 ### DNS反查
 - http://dns.chacha.cn/
+- https://github.com/mandatoryprogrammer/cloudflare_enum
 - http://ptrarchive.com/
 
 ### 在线端口扫描
