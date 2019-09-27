@@ -1,5 +1,11 @@
 # notes
 
+## Bug Bounties
+除了hackerone和bugcrowd之外：
+
+- https://www.openbugbounty.org/  这个可以作为搜集一些常见被报告的网站信息
+- https://yeswehack.com/programs  只有少数有bug bounty
+
 ## 信息收集
 
 ### 基本信息
