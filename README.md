@@ -26,6 +26,7 @@
 - 扫描工具：https://github.com/lijiejie/subDomainsBrute
 - https://github.com/aboul3la/Sublist3r
 - 在线工具：https://phpinfo.me/domain/
+- [Subdomain_recon.py](https://nullsweep.com/subdomain-recon-a-subdomain-reconnaissance-tool/)
 
 ### CMS识别
 - https://whatcms.org/Content-Management-Systems
