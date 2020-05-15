@@ -101,5 +101,8 @@ curl "https://api.hackertarget.com/nmap/?q=baidu.com"
 "burp" site:https://xz.aliyun.com/ OR https://www.anquanke.com/ OR http://paper.seebug.org OR https://www.freebuf.com/ OR https://bbs.ichunqiu.com OR https://bbs.pediy.com/ OR https://www.52pojie.cn
 ```
 
+### 短网址
+- http://sina-t.cn/
+
 ### 最新漏洞&&技术文章
 - [feedly RSS](feedly-6f97a3f2-4440-4635-8994-74cb0baef02b-2019-04-01.opml)
