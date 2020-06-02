@@ -10,6 +10,7 @@
 
 ### 基本信息
 - [天眼查](https://www.tianyancha.com/)
+- https://www.whois.com/whois/
 - http://whois.chinaz.com/
 - https://whois.aliyun.com/
 - https://www.whois365.com/cn/
@@ -67,7 +68,15 @@ curl "https://api.hackertarget.com/nmap/?q=baidu.com"
 ### DNSLog
 - http://ceye.io/
 - http://dnsbin.zhack.ca/
+- http://dnslog.cn/
 - xxx.burpcollaborator.net
+
+### 短网址
+- http://sina-t.cn/
+
+### 短信接收平台
+- https://www.becmd.com/
+- http://z-sms.com/lv?pho_num=17061084088&1
 
 ### 文件/文本共享
 - https://github.com/dutchcoders/transfer.sh
@@ -85,6 +94,11 @@ curl "https://api.hackertarget.com/nmap/?q=baidu.com"
 ### 图像识别
 - https://zhcn.109876543210.com/
 - https://onlineocr.net/
+
+### 证件照处理
+- https://www.tooleyes.com/app/id_photo.html
+- https://www.gaitubao.com/bgcolor
+- https://www.bgconverter.com/
 
 
 ### 技术文章
