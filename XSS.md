@@ -111,6 +111,7 @@ alert;pg("XSS")
 ```
 
 ### Bypassing黑名单
+```
 大多数的场所是用的黑名单来做过滤器的，有三种方式绕过黑名单的测试：
 
 1、暴力测试（输入大量的payload，看返回结果）
@@ -122,7 +123,7 @@ alert;pg("XSS")
 2)尝试插入不闭合的标签，例如：<b，<i，<u，<marquee然后看一下返回响应，是否对开放的标签也有过滤。
 
 3)然后测试几个XSS的payload，基本所有的xss过滤器都会进行过滤的：
-```
+
 <script>alert(1);</script>
 <script>prompt(1);</script>
 <script>confirm(1);</script>
