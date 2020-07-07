@@ -17,6 +17,22 @@
 - https://www.aizhan.com/
 - http://www.miitbeian.gov.cn/publish/query/indexFirst.action
 
+### IP地址段收集
+- https://bgp.he.net/
+
+比如收集百度：
+https://bgp.he.net/search?search%5Bsearch%5D=baidu&commit=Search
+
+- https://github.com/j3ssie/metabigor/releases
+这个工具用到的API是:(http://asnlookup.com/api/lookup?org=baidu, https://bgp.he.net/search?search%5Bsearch%5D=baidu&commit=Search)
+
+- https://github.com/yassineaboukir/Asnlookup
+这个工具其实也是用的http://asnlookup.com/api/lookup?org=baidu
+
+然后用ASN枚举工具，枚举出某个ASN号码的IP段：
+- https://github.com/caffix/amass/releases
+
+
 ### IP归属查询
 - http://www.ip138.com/ips1388.asp
 - http://ip.soshoulu.com/
