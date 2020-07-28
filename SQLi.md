@@ -111,6 +111,16 @@ jdbc.password=root
 </mapper>
 ```
 
+#### Annotation实现Mapper接口
+除了使用xml实现Mapper，还可以用注解（Annotation）方式来实现。
+```java
+@Mapper
+public interface UserMapper {
+    @Select("SELECT * FROM user WHERE id= #{id}")
+    User getById(@Param("id") int id);
+}
+```
+
 
 ## 场景分析
 ### 1. 模糊查询like：
@@ -153,12 +163,12 @@ select username from users ORDER BY id
 select username from users ORDER BY 1
 ```
 如果传入的是引号包裹的字符串，那么 ORDER BY 会失效，如：
-```
+```sql
 SELECT * FROM user ORDER BY 'id'
 ```
 所以，如果要动态传入 ORDER BY 参数，只能用字符串拼接的方式，如：
 
-```
+```java
 String sql = "SELECT * FROM user ORDER BY " + column;
 ```
 那么这样依然可能会存在SQL注入的问题。
@@ -166,22 +176,31 @@ String sql = "SELECT * FROM user ORDER BY " + column;
 ## 修复建议
 ### 1. 模糊查询like SQL注入修复建议
 使用数据库自带的 CONCAT ，将 % 和我们用 #{} 传入参数连接起来，这样就既不存在注入的问题，也能满足需求啦。
+```xml
+<select id="getUserListLikeConcat" resultType="org.example.User">
+	SELECT * FROM user WHERE name LIKE concat ('%', #{name}, '%')
+</select>
 ```
-<select id="selectStudentByFuzzyQuery" resultMap="studentMap">
-    SELECT *
-    FROM student
-    WHERE student.stu_name
-            LIKE CONCAT('%',#{stuName},'%')
+或者
+```xml
+<select id="getUserListLike" resultType="org.example.User">
+    <bind name="pattern" value="'%' + name + '%'" />
+    SELECT * FROM user 
+    WHERE name LIKE #{pattern}
 </select>
 ```
 采用预编译机制，避免了SQL语句拼接的问题，从根源上防止了SQL注入漏洞的产生。
 
 ### 2. in之后的参数SQL注入修复建议
-可使用Mybatis自带循环指令解决SQL语句动态拼接的问题：
+可使用Mybatis自带循环指令（`foreach`）解决SQL语句动态拼接的问题：
 ```
-select * from news where id in
-
-<foreach collection="ids" item="item" open="("separator="," close=")">#{item} </foreach>
+<select id="selectUserIn" resultType="com.example.User">
+  SELECT * FROM user WHERE name in
+  <foreach item="name" collection="nameList" 
+           open="(" separator="," close=")">
+        #{name}
+  </foreach>
+</select>
 ```
 
 ### 3. order by(GROUP BY) SQL注入修复建议--在Java层面做映射
@@ -202,6 +221,19 @@ switch(column){
 }
 ```
 
+### limit 语句
+直接使用 `#{}` 即可
+
+Mapper 接口方法:
+```java
+List<User> getUserListLimit(@Param("offset") int offset, @Param("limit") int limit);
+```
+xml 配置文件
+```
+<select id="getUserListLimit" resultType="org.example.User">
+	SELECT * FROM user limit #{offset}, #{limit}
+</select>
+```
 
 #### column 是 int 型
 因为 Java 是强类型语言，当用户传递的参数与后台定义的参数类型不匹配，程序会抛出异常，赋值失败。所以，不会存在注入的问题。
@@ -231,7 +263,8 @@ Mybatis: 挖掘技巧则是在注解中或者Mybatis相关的配置文件中搜�
 
 ## 参考
 - [给自己一个更安全的 mysql](https://klionsec.github.io/2017/11/22/mysqlconfigsec/)
-- https://jayl1n.github.io/2018/11/15/java-audit-step-by-step-3/
+- [Java SQL 注入学习笔记](https://b1ngz.github.io/java-sql-injection-note/)
+- [从1开始的Java代码审计·第三弹·SQL注入](https://jayl1n.github.io/2018/11/15/java-audit-step-by-step-3/)
 - [java框架之MybatisSQL注入漏洞](https://zhuanlan.zhihu.com/p/28168319)
 - [Java代码审计汇总系列(一)——SQL注入](https://cloud.tencent.com/developer/article/1534109)
 - [本以为用的MyBatis框架就万无一失了，没想到还是被黑客注入了，我真的无语了！](https://mp.weixin.qq.com/s/yr5kp91m6dWrFDZT28Vohw)
