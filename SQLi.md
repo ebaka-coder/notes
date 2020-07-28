@@ -48,6 +48,8 @@ public interface UserMapper {
     List<User> selectAll();
 }
 ```
+与`UserMapper.xml`的对应关系：
+方法名对应`id`，返回类型对应`resultType`。
 
 ### 配置文件（resources目录下）：mybatis-config.xml
 ```xml
