@@ -2,7 +2,7 @@
 
 ## 常见基于MyBatis的业务代码
 指定配置文件`mybatis-config.xml`（这个配置文件会引用其他的相关的配置），载入需要的信息（驱动url、用户名密码、sql配置等）
-```
+```java
 public class MybatisDemo {
 
     private SqlSessionFactory sqlSessionFactory;
