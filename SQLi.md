@@ -1,4 +1,117 @@
 # Mybatis框架下的SQL注入漏洞
+
+## 常见基于MyBatis的业务代码
+指定配置文件`mybatis-config.xml`（这个配置文件会引用其他的相关的配置），载入需要的信息（驱动url、用户名密码、sql配置等）
+```
+public class MybatisDemo {
+
+    private SqlSessionFactory sqlSessionFactory;
+
+    @Test
+    public void testAutoMapping() throws IOException {
+        //-------------第一阶段-------------------
+        // 创建SqlSessionFactory
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        inputStream.close();
+
+        //-------------第二阶段-------------------
+        //获取 SqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        //获取对应 Mapper
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+
+
+        //-------------第三阶段-------------------
+        // 使用Mapper执行查询语句并返回单条数据
+        User user = mapper.selectByPrimaryKey(121312312312L);
+        System.out.println(user);
+
+        // 使用Mapper执行查询语句并返回多条数据
+        List<User> users = mapper.selectAll();
+
+    }
+}
+```
+
+### 实体类：entity/User.java
+某个JavaBean。
+
+### 映射器：mapper/UserMapper.java
+只是一个接口，主要看方法名，返回类型，接收参数。
+```java
+public interface UserMapper {
+
+    User selectByPrimaryKey(long userId);
+
+    List<User> selectAll();
+}
+```
+
+### 配置文件（resources目录下）：mybatis-config.xml
+```xml
+<configuration>
+    <properties resource="db.properties"/>
+
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value ="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+
+    <typeAliases>
+        <package name="com.paul.mybatis.entity" />
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="UNPOOLED">
+                <property name="driver" value="${jdbc_driver}"/>
+                <property name="url" value="${jdbc_url}"/>
+                <property name="username" value="${jdbc_username}"/>
+                <property name="password" value="${jdbc_password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="sqlmapper/UserMapper.xml"/>
+
+    </mappers>
+
+</configuration>
+```
+上面的配置引入了另外两个配置文件：
+#### db.properties
+就是jdbc的url、用户名、密码
+```
+jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://localhost:3306/mybatis?useUnicode=true&characterEncoding=utf8
+jdbc.username=root
+jdbc.password=root
+```
+
+#### sqlmapper/UserMapper.xml
+实现Mapper接口中的方法，`id`对应方法名，`resultType`对应返回值类型。`select`标签内的是sql语句。
+```xml
+<mapper namespace="com.paul.mybatis.mapper.UserMapper">
+
+    <select id="selectByPrimaryKey" resultType="com.paul.mybatis.entity.User">
+        select *
+        from t_user
+        where userId = #{userId}
+    </select>
+
+    <select id="selectAll" resultType="com.paul.mybatis.entity.User">
+        select *
+        from t_user
+    </select>
+
+</mapper>
+```
+
+
 ## 场景分析
 ### 1. 模糊查询like：
 ```
