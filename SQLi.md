@@ -271,3 +271,4 @@ Mybatis: 挖掘技巧则是在注解中或者Mybatis相关的配置文件中搜�
 - [Java代码审计汇总系列(一)——SQL注入](https://cloud.tencent.com/developer/article/1534109)
 - [本以为用的MyBatis框架就万无一失了，没想到还是被黑客注入了，我真的无语了！](https://mp.weixin.qq.com/s/yr5kp91m6dWrFDZT28Vohw)
 - [自己实现一个 MyBatis 框架](https://www.cnblogs.com/paulwang92115/p/12130224.html)
+- [SQLi in Java](https://www.kingkk.com/2019/11/SQLi-in-Java/)
