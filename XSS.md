@@ -1,3 +1,4 @@
+## 攻击payload
 ```
 ';alert(String.fromCharCode(88,83,83))//';alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--></SCRIPT>">'><SCRIPT>alert(String.fromCharCode(88,83,83))</SCRIPT>
 '';!--"<XSS>=&{()}
@@ -503,3 +504,60 @@ http://drops.wooyun.org/tips/147
 - https://wooyun.js.org/drops/Bypass%20xss%E8%BF%87%E6%BB%A4%E7%9A%84%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95.html
 - https://www.leavesongs.com/PENETRATION/xss-collect.html
 - https://portswigger.net/web-security/cross-site-scripting/cheat-sheet
+
+
+## 防御方法
+参考：
+- https://github.com/OWASP/owasp-java-encoder/
+
+引入依赖：
+```xml
+<dependency>
+    <groupId>org.owasp.encoder</groupId>
+    <artifactId>encoder</artifactId>
+    <version>1.2.2</version>
+</dependency>
+
+<dependency>
+    <groupId>org.owasp.encoder</groupId>
+    <artifactId>encoder-jsp</artifactId>
+    <version>1.2.2</version>
+</dependency>
+```
+
+然后在代码中：
+```java
+import org.owasp.encoder.Encode;
+
+// 对输出进行html转义
+Encode.forHtml(xss);
+```
+
+修复前存在漏洞的代码：
+```java
+    @RequestMapping("/reflect")
+    @ResponseBody
+    public static String reflect(String xss)
+    {
+        return xss;
+    }
+```
+
+Demo:
+![](imgs/20200814144921.png)
+
+修复后代码：
+```java
+import org.owasp.encoder.Encode;
+
+    @RequestMapping("/safe_encoder")
+    @ResponseBody
+    public static String safe_encoder(String xss)
+    {
+        return Encode.forHtml(xss);
+    }
+}
+```
+
+Demo:
+![](imgs/20200814144911.png)
