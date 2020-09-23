@@ -135,4 +135,4 @@ curl "https://api.hackertarget.com/nmap/?q=baidu.com"
 - http://sina-t.cn/
 
 ### 最新漏洞&&技术文章
-- [feedly RSS](feedly-6f97a3f2-4440-4635-8994-74cb0baef02b-2019-04-01.opml)
+- [feedly RSS](feedly-6f97a3f2-4440-4635-8994-74cb0baef02b-2020-09-22.opml)
