@@ -48,6 +48,9 @@ https://bgp.he.net/search?search%5Bsearch%5D=baidu&commit=Search
 ### CMS识别
 - https://whatcms.org/Content-Management-Systems
 
+### Window提权补丁
+- https://bugs.hacking8.com/tiquan/
+
 ### github用户邮箱收集
 https://github.com/paulirish/github-email/
 
