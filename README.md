@@ -32,6 +32,8 @@ https://bgp.he.net/search?search%5Bsearch%5D=baidu&commit=Search
 然后用ASN枚举工具，枚举出某个ASN号码的IP段：
 - https://github.com/caffix/amass/releases
 
+Google搜集C段：
+- site:202.202.43.*
 
 ### IP归属查询
 - http://www.ip138.com/ips1388.asp
@@ -40,10 +42,8 @@ https://bgp.he.net/search?search%5Bsearch%5D=baidu&commit=Search
 
 ### 子域名
 
-- 扫描工具：https://github.com/lijiejie/subDomainsBrute
-- https://github.com/aboul3la/Sublist3r
-- 在线工具：https://phpinfo.me/domain/
-- [Subdomain_recon.py](https://nullsweep.com/subdomain-recon-a-subdomain-reconnaissance-tool/)
+- https://github.com/shmilylty/OneForAll
+注意升级！
 
 ### CMS识别
 - https://whatcms.org/Content-Management-Systems
