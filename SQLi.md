@@ -248,6 +248,10 @@ Mybatis: 挖掘技巧则是在注解中或者Mybatis相关的配置文件中搜�
 
 - 6、SQLi检测绕过
 
+### 快速定位xml中的可能sqli
+```bash
+grep -rn '\$' `find .|grep Mapper.xml`
+```
 
 ## 参考
 - [给自己一个更安全的 mysql](https://klionsec.github.io/2017/11/22/mysqlconfigsec/)
