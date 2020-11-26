@@ -223,20 +223,6 @@ switch(column){
 }
 ```
 
-### limit 语句
-直接使用 `#{}` 即可
-
-Mapper 接口方法:
-```java
-List<User> getUserListLimit(@Param("offset") int offset, @Param("limit") int limit);
-```
-xml 配置文件
-```
-<select id="getUserListLimit" resultType="org.example.User">
-	SELECT * FROM user limit #{offset}, #{limit}
-</select>
-```
-
 #### column 是 int 型
 因为 Java 是强类型语言，当用户传递的参数与后台定义的参数类型不匹配，程序会抛出异常，赋值失败。所以，不会存在注入的问题。
 
