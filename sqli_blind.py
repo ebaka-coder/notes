@@ -29,7 +29,7 @@ strings = ''
 #         except Exception as e:    # 超时了就会到这里
 #             strings  = strings + y
 #             print(strings)
-# print('res: '+strings)
+# print('[*] '+strings)
 
 
 user_len= 17
@@ -44,4 +44,4 @@ for i in range(1,user_len+1):
         except Exception as e:    # 超时了就会到这里
             strings  = strings + y
             print(strings)
-print('res: '+strings)
+print('[*] '+strings)
