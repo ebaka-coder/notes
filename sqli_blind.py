@@ -34,7 +34,7 @@ strings = ''
 
 user_len= 17
 
-# 变量i对应substr(user(),{},1)的第二个位置的参数，表示拿到user()这个结果字符串的第i未字符
+# 变量i对应substr(user(),{},1)的第二个位置的参数，表示拿到user()这个结果字符串的第i位字符
 # ord(y)是拿到某个字符的ASCII十进制数，与ascii()的结果格式对应
 for i in range(1,user_len+1):
     for y in payload:    # 使用ascii字符对database()的每一位进行枚举
