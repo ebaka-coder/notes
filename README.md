@@ -95,6 +95,12 @@ curl "https://api.hackertarget.com/nmap/?q=baidu.com"
 - http://www.cmd5.com/
 - https://crackstation.net/
 
+### 社工字典生成器
+- https://github.com/HongLuDianXue/BaiLu-SED-Tool
+- https://github.com/huyuanzhi2/password_brute_dictionary
+
+### GitHub的dorks
+- https://github.com/obheda12/GitDorker/tree/master/Dorks
 
 ### pcap文件在线分析
 - https://packettotal.com/
@@ -111,6 +117,8 @@ curl "https://api.hackertarget.com/nmap/?q=baidu.com"
 ### 短信接收平台
 - https://www.becmd.com/
 - http://z-sms.com/lv?pho_num=17061084088&1
+- https://www.materialtools.com/
+- https://yunduanxin.net/China-Phone-Number/
 
 ### 文件/文本共享
 - https://github.com/dutchcoders/transfer.sh
