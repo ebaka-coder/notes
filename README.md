@@ -40,6 +40,10 @@ Google搜集C段：
 - http://ip.soshoulu.com/
 - https://www.ipip.net/ip.html
 
+### 绕过CDN查找真实IP
+- https://github.com/Tai7sy/fuckcdn
+- https://github.com/superfish9/hackcdn
+
 ### 子域名
 
 - https://github.com/shmilylty/OneForAll
