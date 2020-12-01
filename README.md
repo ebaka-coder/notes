@@ -7,9 +7,15 @@
 - https://yeswehack.com/programs  只有少数有bug bounty
 
 ## 信息收集
+企业的分公司，全资子公司，网站域名、手机app,微信小程序，企业专利品牌信息，企业邮箱，电话。
+参考：
+- [SRC混子的漏洞挖掘之道](https://xz.aliyun.com/t/8501)
 
 ### 基本信息
+企查查、天眼查淘宝都有那种一天的会员。对于我们信息收集其实已经够用。
+
 - [天眼查](https://www.tianyancha.com/)
+- [企查查](https://www.qcc.com/)
 - https://www.whois.com/whois/
 - http://whois.chinaz.com/
 - https://whois.aliyun.com/
@@ -47,7 +53,11 @@ Google搜集C段：
 ### 子域名
 
 - https://github.com/shmilylty/OneForAll
-注意升级！
+注意升级！使用代理和不使用代理都来一套。
+
+### js信息收集
+- https://github.com/p1g3/JSINFO-SCAN
+- https://github.com/Threezh1/JSFinder
 
 ### CMS识别
 - https://whatcms.org/Content-Management-Systems
@@ -65,6 +75,7 @@ https://github.com/paulirish/github-email/
 
 ### 在线端口扫描
 - https://hackertarget.com/tcp-port-scan/
+
 #### Demo
 ```
 curl "https://api.hackertarget.com/nmap/?q=baidu.com"
