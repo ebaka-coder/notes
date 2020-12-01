@@ -254,6 +254,7 @@ grep -rn '\$' `find .|grep Mapper.xml`
 ```
 
 ## 参考
+- [Mybatis框架下SQL注入漏洞面面观](https://mp.weixin.qq.com/s/TXXJAOlaLEHngNjx1cv0Sw)
 - [给自己一个更安全的 mysql](https://klionsec.github.io/2017/11/22/mysqlconfigsec/)
 - [Java SQL 注入学习笔记](https://b1ngz.github.io/java-sql-injection-note/)
 - [从1开始的Java代码审计·第三弹·SQL注入](https://jayl1n.github.io/2018/11/15/java-audit-step-by-step-3/)
