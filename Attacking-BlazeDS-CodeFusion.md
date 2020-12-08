@@ -73,7 +73,7 @@ http://apache-flex-users.2333346.n4.nabble.com/CVE-2015-3269-Apache-Flex-BlazeDS
 
 
 #### [CVE-2017-5641] 反序列化 BlazeDS< 4.7.3
-- [CVE-2017-5641] - DrayTek Vigor ACS 2 Java Deserialisation RCE
+- [[CVE-2017-5641] - DrayTek Vigor ACS 2 Java Deserialisation RCE](https://seclists.org/fulldisclosure/2018/Apr/40)
 
 
 ### 参考
