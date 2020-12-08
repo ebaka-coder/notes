@@ -65,23 +65,25 @@ http://apache-flex-users.2333346.n4.nabble.com/CVE-2015-3269-Apache-Flex-BlazeDS
 ```
 
 
-#### [CVE-2017-5641] 反序列化 BlazeDS< 4.7.3
-
 #### [CVE-2017-3066]Adobe Coldfusion BlazeDS反序列化
 影响范围：
-Adobe ColdFusion 2016 Update 3 and earlier
-Adobe ColdFusion 11 update 11 and earlier
-ColdFusion 10 Update 22 and earlier
+- Adobe ColdFusion 2016 Update 3 and earlier
+- Adobe ColdFusion 11 update 11 and earlier
+- ColdFusion 10 Update 22 and earlier
 
 
-参考：
+#### [CVE-2017-5641] 反序列化 BlazeDS< 4.7.3
+- [CVE-2017-5641] - DrayTek Vigor ACS 2 Java Deserialisation RCE
+
+
+### 参考
 - [Adobe Coldfusion 11.0.03.292866 - BlazeDS Java Object Deserialization Remote Code Execution](https://www.exploit-db.com/exploits/43993)
 - https://codewhitesec.blogspot.com/2018/03/exploiting-adobe-coldfusion.html
 - [Exploitation Tool for CVE-2017-3066 targeting Adobe Coldfusion 11/12](https://github.com/codewhitesec/ColdFusionPwn/tree/master/src/main/java)
 - https://github.com/vulhub/vulhub/blob/master/coldfusion/CVE-2017-3066/README.zh-cn.md
 - [Adobe官方公告](https://helpx.adobe.com/security/products/coldfusion/apsb17-14.html)
 
-## 参考
+## 其他参考
 
 - [ColdFusion for Pentesters](http://www.carnal0wnage.com/papers/LARES-ColdFusion.pdf)
 - http://web.archive.org/web/20101226181618/http://www.security-assessment.com/files/advisories/2010-02-22_Multiple_Adobe_Products-XML_External_Entity_and_XML_Injection.pdf
