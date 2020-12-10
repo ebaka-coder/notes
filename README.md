@@ -43,6 +43,7 @@ Google搜集C段：
 - site:202.202.43.*
 
 ### IP归属查询
+- https://img.cy/ip
 - http://www.ip138.com/ips1388.asp
 - http://ip.soshoulu.com/
 - https://www.ipip.net/ip.html
