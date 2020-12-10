@@ -417,4 +417,12 @@ finally:
 | Service undeployed
 ```
 
-
+### 缓解措施
+由于没有分配CVE，不好找官方的修复建议和补丁之类的，只知道升级到最新版。在无法升级的情况下，因为XXE的利用点是`/PSIGW/HttpListeningConnector`，而部署Service的利用点是`/pspc/services`，所以作为临时措施，可以禁用以下路径：
+```
+- /PSIGW/HttpListeningConnector
+- /pspc/services
+- /pspc/services/*
+- /PSOL/*
+```
+最后的是webshell的路径。
