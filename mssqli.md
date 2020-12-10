@@ -1,0 +1,1 @@
+- [MSSQL GetShell方法](https://xz.aliyun.com/t/8603)
