@@ -2,7 +2,7 @@
 - [ORACLE PEOPLESOFT REMOTE CODE EXECUTION: BLIND XXE TO SYSTEM SHELL](https://www.ambionics.io/blog/oracle-peoplesoft-xxe-to-rce)
 - [exploit-db][RCE vulnerability in monitor service of PeopleSoft 8.54, 8.55, 8.56](https://www.exploit-db.com/exploits/43594)
 - [exploit-db][Oracle PeopleSoft Enterprise PeopleTools < 8.55 - Remote Code Execution Via Blind XML External Entity](https://www.exploit-db.com/exploits/43114)
-- [exploit-db]['PeopleSoftServiceListeningConnector' XML External Entity via DOCTYPE in PeopleSoft 8.55]https://www.exploit-db.com/exploits/41925)
+- [exploit-db]['PeopleSoftServiceListeningConnector' XML External Entity via DOCTYPE in PeopleSoft 8.55](https://www.exploit-db.com/exploits/41925)
 - [exploit-db][SSRF in PeopleSoft 8.55 IMServlet ](https://www.exploit-db.com/exploits/42034)
 - https://github.com/blazeinfosec/CVE-2017-10366_peoplesoft
 - [Oracle PeopleSoft applications are under attacks!](https://conference.hitb.org/hitbsecconf2015ams/wp-content/uploads/2015/02/D1T2-Alexey-Tiurin-Oracle-Peoplesoft-Applications-are-Under-Attack.pdf)
