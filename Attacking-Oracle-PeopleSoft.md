@@ -6,8 +6,8 @@
 - [exploit-db CVE-2017-3546][SSRF in PeopleSoft 8.55 IMServlet ](https://www.exploit-db.com/exploits/42034)
 - https://github.com/blazeinfosec/CVE-2017-10366_peoplesoft
 - [Oracle PeopleSoft applications are under attacks!](https://conference.hitb.org/hitbsecconf2015ams/wp-content/uploads/2015/02/D1T2-Alexey-Tiurin-Oracle-Peoplesoft-Applications-are-Under-Attack.pdf)
-- https://erpscan.com/advisories/erpscan-17-020-xxe-via-doctype-peoplesoft/
-- https://erpscan.com/advisories/erpscan-17-022-ssrf-peoplesoft-imservlet/
+- https://erpscan.io/advisories/erpscan-17-020-xxe-via-doctype-peoplesoft/
+- https://erpscan.io/advisories/erpscan-17-022-ssrf-peoplesoft-imservlet/
 
 
 
