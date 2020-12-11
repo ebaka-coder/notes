@@ -514,3 +514,8 @@ finally:
 - /PSOL/*
 ```
 最后的是webshell的路径。
+
+
+### 下载方式
+- https://edelivery.oracle.com/osdc/faces/SoftwareDelivery
+搜索`PeopleTools`，我这里选择了`PeopleSoft PeopleTools 8.58 for Linux x86-64`，会下载一个exe的donwloader。在[这里](https://github.com/shadowsock5/notes/blob/master/Oracle_SSN_DLM_12111054.exe)
