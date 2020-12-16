@@ -67,6 +67,9 @@ Google搜集C段：
 ### Window提权补丁
 - https://bugs.hacking8.com/tiquan/
 
+### app抓包
+- [如何利用http tunnel使用burpsuite拦截某个app的tcp数据包（非http）做安全分析](https://xz.aliyun.com/t/8640)
+
 ### github用户邮箱收集
 https://github.com/paulirish/github-email/
 
