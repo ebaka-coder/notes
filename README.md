@@ -12,6 +12,10 @@
 - [SRC混子的漏洞挖掘之道](https://xz.aliyun.com/t/8501)
 - [浅谈攻防演练中的信息收集](https://xz.aliyun.com/t/8578)
 
+### 资产管理
+- https://github.com/CTF-MissFeng/bayonet
+- https://github.com/CTF-MissFeng/Watchdog
+
 ### 基本信息
 企查查、天眼查淘宝都有那种一天的会员。对于我们信息收集其实已经够用。
 
