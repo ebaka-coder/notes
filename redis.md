@@ -192,3 +192,4 @@ root@ubuntu:~#
 - [redis 在渗透中 getshell 方法总结](https://zhuanlan.zhihu.com/p/36529010)
 - [浅析Redis中SSRF的利用](https://xz.aliyun.com/t/5665)
 - [ssrf与gopher与redis](https://www.cnblogs.com/sijidou/p/13681845.html)
+- [通过一道审计题了解SSRF](https://www.smi1e.top/%E9%80%9A%E8%BF%87%E4%B8%80%E9%81%93%E5%AE%A1%E8%AE%A1%E9%A2%98%E4%BA%86%E8%A7%A3ssrf/)
