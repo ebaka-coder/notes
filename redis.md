@@ -179,6 +179,11 @@ root@ubuntu:~#
 
 ### 通过计划任务实现RCE
 //TODO
+> 测试了centos7和ubuntu，默认情况下redis写入计划任务反弹shell，在centos下是可以的。
+由于redis写入文件会写入脏数据，ubuntu计划任务不允许有脏数据，所以ubuntu没办法通过redis写入计划任务进行操作。
+
+参考： 
+- [redis数据库在渗透中的利用](https://xz.aliyun.com/t/8018#toc-8)
 
 
 ### 302跳转
@@ -187,9 +192,16 @@ root@ubuntu:~#
 - 跳转到`http://brutelogic.com.br/poc.svg`等，转换成反射型XSS。
 - 限定协议时，跳转到攻击者控制的主机，然后location：其他协议。
 
+### 其他方式
+//TODO
+- redis主从复制
+- 加载module
+- 写入/etc/passwd 实现ssh登录
+
 ### 参考
 - [利用redis写webshell](https://www.leavesongs.com/PENETRATION/write-webshell-via-redis-server.html)
 - [redis 在渗透中 getshell 方法总结](https://zhuanlan.zhihu.com/p/36529010)
 - [浅析Redis中SSRF的利用](https://xz.aliyun.com/t/5665)
 - [ssrf与gopher与redis](https://www.cnblogs.com/sijidou/p/13681845.html)
 - [通过一道审计题了解SSRF](https://www.smi1e.top/%E9%80%9A%E8%BF%87%E4%B8%80%E9%81%93%E5%AE%A1%E8%AE%A1%E9%A2%98%E4%BA%86%E8%A7%A3ssrf/)
+- [不请自来 | Redis 未授权访问漏洞深度利用](https://www.freebuf.com/vuls/148758.html)
