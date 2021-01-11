@@ -205,3 +205,4 @@ root@ubuntu:~#
 - [ssrf与gopher与redis](https://www.cnblogs.com/sijidou/p/13681845.html)
 - [通过一道审计题了解SSRF](https://www.smi1e.top/%E9%80%9A%E8%BF%87%E4%B8%80%E9%81%93%E5%AE%A1%E8%AE%A1%E9%A2%98%E4%BA%86%E8%A7%A3ssrf/)
 - [不请自来 | Redis 未授权访问漏洞深度利用](https://www.freebuf.com/vuls/148758.html)
+- http://blog.leanote.com/post/snowming/2d9a2082c02b
