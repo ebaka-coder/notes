@@ -142,6 +142,14 @@ Set-Cookie: remember-me=;Max-Age=0;path=/
 ![](imgs/微信图片_20210112171514.png)
 ![](imgs/微信图片_20210112171531.png)
 
+
+### Spring中的CSRF防护
+json的CSRF是否需要防御，看具体的应用。如果没有校验`Content-Type`，也是可能可以利用的。
+
+CSRF token存储在`HttpSession`中，当HttpSession 过期后，会触发`InvalidCsrfTokenException`，响应`HTTP 403 Access Denied`。
+如果不想让这个CSRF token过期，可以将token存储在Cookie中，这样虽然不如存储在Session中安全，但是大多场景下已经足够。
+
 ## 参考
 - [Easy way to learn Spring Security 5](https://medium.com/@satyakm.dev/understanding-spring-security-internals-with-code-walkthrough-850d5749252c)
 - https://docs.spring.io/spring-security/site/docs/3.2.0.CI-SNAPSHOT/reference/html/remember-me.html
+- https://docs.spring.io/spring-security/site/docs/5.0.x/reference/html/csrf.html
