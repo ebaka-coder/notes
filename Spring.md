@@ -139,6 +139,8 @@ Set-Cookie: XSRF-TOKEN=fc07d3f7-9850-4c8f-bdc4-62860cb92ba9;path=/;HttpOnly
 Set-Cookie: remember-me=;Max-Age=0;path=/
 ```
 再比如访问需要登录才能访问的/index，则在expirationTime之内，这个remember-me可以作为登录凭证，有JSESSIONID一样的效果。
+![](imgs/微信图片_20210112171514.png)
+![](imgs/微信图片_20210112171531.png)
 
 ## 参考
 - [Easy way to learn Spring Security 5](https://medium.com/@satyakm.dev/understanding-spring-security-internals-with-code-walkthrough-850d5749252c)
