@@ -41,4 +41,5 @@
 - 9001: supervisor（RCE）
 - 9090: websphere（反序列化、爆破）
 - 9200/9300: elasticsearch（未授权访问）
+- 9411: zipkin
 ```
