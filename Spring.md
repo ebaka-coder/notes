@@ -74,7 +74,7 @@ Servlet处理业务逻辑，在客户端的请求到达Servlet之前，需要配
 `spring-boot-starter-security`这个依赖自动将Spring Security引入到Spring MVC或者其他非Spring Boot的项目中。
 
 ### remember-me这个Cookie
-登录成功之后，如果请求中指定了要remember-me，服务端不仅返回有效的`JSESSIONID`，同时返回`remember-me`这个Cookie（这个名字是硬编码在Spring Security中的）
+登录成功之后，如果请求中指定了要remember-me(`remember-me=true`。若未指定，则不返回`remember-me`这个Cookie)，服务端不仅返回有效的`JSESSIONID`，同时返回`remember-me`这个Cookie（这个名字是硬编码在Spring Security中的）
 ```http
 POST /login HTTP/1.1
 Host: qqc.com:8080
@@ -138,7 +138,7 @@ HTTP/1.1 200
 Set-Cookie: XSRF-TOKEN=fc07d3f7-9850-4c8f-bdc4-62860cb92ba9;path=/;HttpOnly
 Set-Cookie: remember-me=;Max-Age=0;path=/
 ```
-
+再比如访问需要登录才能访问的/index，则在expirationTime之内，这个remember-me可以作为登录凭证，有JSESSIONID一样的效果。
 
 ## 参考
 - [Easy way to learn Spring Security 5](https://medium.com/@satyakm.dev/understanding-spring-security-internals-with-code-walkthrough-850d5749252c)
