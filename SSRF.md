@@ -48,3 +48,5 @@
 
 ### 参考
 - https://github.com/hackerscrolls/SecurityTips/blob/master/MindMaps/SSRF.png
+- [SSRF Tips](https://blog.safebuff.com/2016/07/03/SSRF-Tips/)
+- [多个应用的盲SSRF](https://github.com/assetnote/blind-ssrf-chains)
