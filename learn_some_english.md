@@ -17,6 +17,9 @@ lead to
 result in
 
 
+leverage
+利用（杠杆）
+
 
 for responsibly
 reporting this issue and working with us as we addressed it.
