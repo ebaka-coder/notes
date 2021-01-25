@@ -16,7 +16,6 @@
 - 绕过重定向保护（301,302,307等）
 
 
-
 3、绕过黑名单保护
 ### URL解析绕过
 - http://evil$google.com，
@@ -51,3 +50,11 @@
 - [SSRF Tips](https://blog.safebuff.com/2016/07/03/SSRF-Tips/)
 - https://blog.assetnote.io/2021/01/13/blind-ssrf-chains/
 - [多个应用的盲SSRF](https://github.com/assetnote/blind-ssrf-chains)
+- [LibreOffice转换PDF导致的SSRF](https://r4id3n.medium.com/ssrf-exploitation-in-spreedsheet-to-pdf-converter-2c7eacdac781)
+
+
+
+#### LibreOffice转换PDF导致的SSRF
+- `<img src="http://127.0.0.1">`，发现并不能拿到127的内容，有安全机制；
+- `<img src=”http://myvps:1337”>`，vps接收到响应，根据UA得知是LibreOffice，
+- 利用上传xlsx的功能，在content.xml中注入payload，在转换成pdf过程中实现SSRF拿到敏感信息（[169.254.169.254]的metadata）
